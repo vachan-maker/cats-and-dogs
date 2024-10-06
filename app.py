@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,redirect,url_for
-import pip._vendor.requests 
+import pip._vendor.requests as requests
 
 app = Flask(__name__)
 
@@ -7,8 +7,17 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/dogs')
 def dogs():
-    return render_template('dogs.html')
+    response = requests.get('https://dog.ceo/api/breeds/image/random')
+    data = response.json()
+    image = data["message"]
+    print(data)
+    return render_template('dogs.html', dogImage = image)
 
+@app.route('/cats')
+def cats():
+    response = requests.get('https://cataas.com//cat')
+    return render_template('cats.html', catImage = response)
 if __name__ == "__main__":
     app.run(debug=True)
