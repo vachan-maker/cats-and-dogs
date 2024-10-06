@@ -17,9 +17,9 @@ def dogs():
 
 @app.route('/cats')
 def cats():
-    response = requests.get('https://cataas.com//cat?json=true')
+    response = requests.get('https://cataas.com/cat?json=true')
     data = response.json()
-    print(data)
+    print
     catPhoto = data["_id"]
     return render_template('cats.html', catImage = catPhoto)
 if __name__ == "__main__":
